@@ -10,7 +10,7 @@ try {
         return res.status(401).send("Please Login!")
     }
   // validate the token
-  const decodedCookieObject = jwt.verify(_devtinderuser, "7cfe96f167e4e4b327fbf9f19485d0d9");
+  const decodedCookieObject = jwt.verify(_devtinderuser, process.env.JWT_SECRET);
   // find the user
   const { _id } = decodedCookieObject;
   const userData = await User.findById(_id);

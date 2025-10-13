@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const connectDB = require("./config/database");
 const User = require("./models/user");
@@ -7,7 +9,7 @@ const requestRouter = require("./routes/request");
 const userRouter = require("./routes/user");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const app = express(); 
+const app = express();
 
 const corsOptions = {
   origin: "http://localhost:5173", // frontend URL
@@ -60,12 +62,12 @@ app.delete("/user", async (req, res) => {
   } catch (error) {
     res.status(500).send("something went wrong");
   }
-})
+});
 
 connectDB()
   .then(() => {
     console.log("Database connection established ...");
-    app.listen(3000, () => console.log("server running on PORT 3000"));
+    app.listen(process.env.PORT, () => console.log("server running on PORT ", process.env.PORT));
   })
   .catch((err) => {
     console.log("Database cannot be connected");

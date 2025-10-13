@@ -75,7 +75,7 @@ const userSchema = new mongoose.Schema(
 // always use normal function
 userSchema.methods.getJWT = async function () {
   const user = this; // reference to current user
-  const token = jwt.sign({ _id: user._id }, "7cfe96f167e4e4b327fbf9f19485d0d9", {
+  const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
     expiresIn: "7d",
   });
 
